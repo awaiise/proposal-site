@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Will you marry me?</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="confetti-canvas"></canvas>
+
+  <main class="card">
+    <h1 id="title">A special question...</h1>
+
+    <label for="nameInput" class="sr">Enter their name (optional)</label>
+    <input id="nameInput" placeholder="Type their name (e.g. Sarah)" />
+
+    <div class="controls">
+      <button id="showBtn">Reveal Proposal</button>
+      <button id="playBtn">Play Music</button>
+      <button id="qrBtn">Open QR Generator</button>
+    </div>
+
+    <div id="proposalBox" class="proposal hidden">
+      <p id="proposalText" class="proposal-text">
+        I have something important to ask...
+      </p>
+
+      <div class="response-buttons">
+        <button id="yesBtn" class="yes">Yes ❤️</button>
+        <button id="noBtn" class="no">I need time</button>
+      </div>
+
+      <p id="afterResponse" class="after-response"></p>
+    </div>
+
+    <p id="hint" class="hint">Tip: Add their name and click “Reveal Proposal”.</p>
+  </main>
+
+  <!-- audio: replace with your own romantic short mp3 when ready -->
+  <audio id="proposal-audio" preload="auto">
+    <source src="https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QR Generator - Proposal Page</title>
+  <style>
+    body{ font-family: Arial, Helvetica, sans-serif; padding:24px; display:flex; gap:20px; align-items:flex-start; background:#f6f7fb; }
+    .box{ background:#fff; padding:18px; border-radius:8px; box-shadow:0 8px 20px rgba(0,0,0,0.06); max-width:720px; }
+    input{ width:520px; padding:10px; border:1px solid #ddd; border-radius:6px; }
+    button{ padding:10px 14px; margin-left:8px; }
+    #qrcode{ margin-top:12px; display:flex; align-items:center; justify-content:center; }
+    code{ background:#f2f3f5; padding:2px 6px; border-radius:4px; }
+    p.small{ color:#666; font-size:0.95rem; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>QR Generator</h2>
+    <p class="small">Paste the URL to your proposal page. For local testing with phones on the same Wi-Fi, use your computer’s LAN IP address (example: <code>http://192.168.1.7:5500/</code>).</p>
+
+    <div>
+      <input id="urlInput" placeholder="https://your-site-or-local-ip:port/" />
+      <button id="make">Make QR</button>
+      <button id="download">Download PNG</button>
+    </div>
+
+    <div id="qrcode"></div>
+    <p class="small" style="margin-top:8px;">Tip: after generating, long-press the image on your phone to save, or click <strong>Download PNG</strong> on your computer to save the QR file for printing.</p>
+  </div>
+
+  <!-- qrcodejs CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    const make = document.getElementById('make');
+    const download = document.getElementById('download');
+    const urlInput = document.getElementById('urlInput');
+    const qrcodeEl = document.getElementById('qrcode');
+    let qrcode;
+
+    make.addEventListener('click', () => {
+      const url = urlInput.value.trim();
+      if(!url) return alert('Paste the URL first');
+      qrcodeEl.innerHTML = '';
+      qrcode = new QRCode(qrcodeEl, { text: url, width:300, height:300 });
+    });
+
+    download.addEventListener('click', () => {
+      if(!qrcodeEl.querySelector('img') && !qrcodeEl.querySelector('canvas')) return alert('Generate a QR first');
+      const img = qrcodeEl.querySelector('img');
+      if(img){
+        const src = img.src;
+        const a = document.createElement('a');
+        a.href = src;
+        a.download = 'proposal-qr.png';
+        a.click();
+        return;
+      }
+      const canvas = qrcodeEl.querySelector('canvas');
+      if(canvas){
+        const a = document.createElement('a');
+        a.href = canvas.toDataURL('image/png');
+        a.download = 'proposal-qr.png';
+        a.click();
+      }
+    });
+  </script>
+</body>
+</html>
