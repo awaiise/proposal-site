@@ -1,5 +1,5 @@
 /* script.js
-   Handles:
+   Cleaned version:
    - auto-name from URL (?name=)
    - reveal proposal
    - heart particles
@@ -20,14 +20,7 @@ const yesBtn = document.getElementById('yesBtn');
 const noBtn = document.getElementById('noBtn');
 const afterResponse = document.getElementById('afterResponse');
 const audio = document.getElementById('proposal-audio');
-const volumeSlider = document.getElementById('volumeSlider');   // may already exist
-const loopCheckbox = document.getElementById('loopCheckbox');
-const inlineQrArea = document.getElementById('inlineQrArea');
-const inlineUrlInput = document.getElementById('inlineUrlInput');
-const generateInlineQr = document.getElementById('generateInlineQr');
-const downloadInlineQr = document.getElementById('downloadInlineQr');
-const inlineQrcode = document.getElementById('inlineQrcode');
-
+const volumeSlider = document.getElementById('volumeSlider'); // single declaration for slider
 
 const canvas = document.getElementById('fx-canvas');
 const ctx = canvas.getContext('2d');
@@ -108,11 +101,9 @@ function drawHeart(p){
   ctx.save();
   ctx.translate(p.x, p.y);
   ctx.rotate(p.rot);
-  ctx.scale(1, 1);
   const s = p.size;
   ctx.fillStyle = `hsl(${p.hue}deg 90% 60%)`;
   ctx.beginPath();
-  // simple heart with bezier curves
   ctx.moveTo(0, s/4);
   ctx.bezierCurveTo(s/2, -s/2, s*1.5, s/3, 0, s);
   ctx.bezierCurveTo(-s*1.5, s/3, -s/2, -s/2, 0, s/4);
@@ -194,9 +185,7 @@ showBtn.addEventListener('click', () => {
 });
 
 // --------- Volume & Fade-in support ---------
-const volumeSlider = document.getElementById('volumeSlider');
-
-// initialize volume (use 1.0 default if slider not present)
+// volumeSlider declared above
 audio.volume = volumeSlider ? parseFloat(volumeSlider.value) : 1.0;
 
 // When slider moves, update audio.volume immediately
