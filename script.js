@@ -20,6 +20,14 @@ const yesBtn = document.getElementById('yesBtn');
 const noBtn = document.getElementById('noBtn');
 const afterResponse = document.getElementById('afterResponse');
 const audio = document.getElementById('proposal-audio');
+const volumeSlider = document.getElementById('volumeSlider');   // may already exist
+const loopCheckbox = document.getElementById('loopCheckbox');
+const inlineQrArea = document.getElementById('inlineQrArea');
+const inlineUrlInput = document.getElementById('inlineUrlInput');
+const generateInlineQr = document.getElementById('generateInlineQr');
+const downloadInlineQr = document.getElementById('downloadInlineQr');
+const inlineQrcode = document.getElementById('inlineQrcode');
+
 
 const canvas = document.getElementById('fx-canvas');
 const ctx = canvas.getContext('2d');
@@ -217,6 +225,7 @@ function fadeTo(target, duration = 3000) {
     if (volumeSlider) volumeSlider.value = target;
     return;
   }
+
   const steps = Math.round(duration / 50);
   let step = 0;
   fadeInterval = setInterval(() => {
